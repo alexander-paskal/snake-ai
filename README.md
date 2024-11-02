@@ -13,9 +13,9 @@ This project implements a Reinforcement Learning (RL) agent to play the game of 
     - [Environment](#environment)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
   - [Training the agent](#training-the-agent)
   - [Evaluation](#evaluation)
-  - [Future Work](#future-work)
 
 ---
 
@@ -37,6 +37,8 @@ This project slightly modifies the [Gym-Snake](https://github.com/grantsrb/Gym-S
 - **Pytorch**
 - **Numpy**
 - **Matplotlib** (for plotting results)
+
+### Installation
 
 1. First install all dependencies with:
 
@@ -70,9 +72,4 @@ python eval_agent.py
 This script will visualize the Snake agent’s performance.
 
 
-
-## Future Work
-- Explore Other Architectures: Experiment with algorithms such as SAC and TD3.
-- Environment Modifications: Increase the Snake grid size or add obstacles for higher difficulty.
-- Hyperparameter Tuning: Fine-tune training parameters for better performance.
 
