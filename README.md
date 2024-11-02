@@ -1,12 +1,13 @@
-# Snake-RL-Agent 🐍
+# Snake-RL 🐍
 
-This project implements a Reinforcement Learning (RL) agent to play the classic game of Snake using [Stable Baselines](https://stable-baselines3.readthedocs.io/). 
+This project implements a Reinforcement Learning (RL) agent to play the game of Snake using [Stable Baselines](https://stable-baselines3.readthedocs.io/). 
 
 ![Demo](media/Johnny-Dense-2.gif) <!-- Replace with your actual media path -->
 
 ## Table of Contents
 
-- [Snake-RL-Agent 🐍](#snake-rl-agent-)
+
+- [Snake-RL 🐍](#snake-rl-)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
     - [Environment](#environment)
@@ -45,7 +46,7 @@ pip install -r requirements.txt
 ```
 2. Then pip install the Gym-Snake environment locally
 
-```
+```bash
 pip install -e Gym-Snake
 ```
 
@@ -67,15 +68,13 @@ Once trained, the model can be evaluated with:
 ```bash
 python eval_agent.py
 ```
-This script will visualize the Snake agent’s performance and compute evaluation metrics such as average score and survival time.
+This script will visualize the Snake agent’s performance.
 
 
 ## Results
 
-Learning Curve: Shows the agent’s reward over training episodes.
 ![Training Reward Curve](media/rew_curve.png)
 
-Gameplay GIF: A recording of the trained agent playing Snake.
 ![](media/Johnny-Dense-2.gif)
 
 
