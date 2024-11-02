@@ -25,7 +25,7 @@ The Snake game is a classic reinforcement learning environment that poses challe
 
 ### Environment
 
-This project slightly modifies the [Gym-Snake](https://github.com/grantsrb/Gym-Snake) repository for training. Thanks to [grantsrb](https://github.com/grantsrb) for making it.
+This project slightly modifies the [Gym-Snake](https://github.com/grantsrb/Gym-Snake) repository for training. Thanks to [grantsrb](https://github.com/grantsrb) for making it. Apart from a couple of minor bugfixes / quality of life improvements, the main change was the addition of a small dense reward based on the manhattan distance between the head of the snake and the square containing the food. 
 
 ## Getting Started
 
@@ -58,7 +58,6 @@ To train the RL agent, run:
 ```bash
 python train_agent.py
 ```
-
 
 Training outputs will be saved to the agents folder
 
