@@ -4,7 +4,7 @@ Might have to fix a couple of errors
 
 Add the Tensorboard 
 """
-from typing import Callable
+from typing import Callable, Literal
 import numpy as np
 import torch
 from stable_baselines3 import PPO
@@ -42,7 +42,7 @@ def log10_schedule(initial_value: float) -> Callable[[float], float]:
     Logarithmic Schedule that decays the learning rate logarithmically
     0%  = IV
     10% = IV * 0.1
-    20% = IV * 0.001
+    20% = IV * 0.01
     ...
 
     :param initial_value: Initial learning rate.
@@ -84,12 +84,18 @@ if __name__ == "__main__":
     argparser = ArgumentParser()
     argparser.add_argument("--agent", type=str, default="new-agent", help="The name of the agent you want to train")
     argparser.add_argument("--steps", type=int, default=1_000_000, help="The number of training steps")
-    
+    argparser.add_argument("--rollout_length", type=int, default=2048, help="The number of environment steps to run per update")
+    argparser.add_argument("--lr", type=float, default=1e-3, help="The learning rate to start with")
+    argparser.add_argument("--schedule", type=str, default="linear", help="The learning rate schedule to use. Options are 'linear', 'log10'. ")
+
     args = argparser.parse_args()
 
     agent = args.agent
     steps = args.steps
-
+    rollout = args.rollout_length
+    lr = args.lr
+    schedule = linear_schedule if args.schedule == "linear" else log10_schedule if args.schedule == "log10" else linear_schedule
+    
     agentsdir = Path("agents")
     agentsdir.mkdir(exist_ok=True)
 
@@ -104,10 +110,10 @@ if __name__ == "__main__":
     # Create the PPO model
     if not os.path.exists(f"{agent}.zip"):
         print("Birthing", agent)
-        model = PPO("CnnPolicy", env, verbose=2, learning_rate=log10_schedule(0.001), tensorboard_log=log_dir)
+        model = PPO("CnnPolicy", env, verbose=2, learning_rate=schedule(lr), n_steps=rollout, tensorboard_log=log_dir)
     else:
         print("Loading", agent)
-        model = PPO.load(f"agentsdir / {agent}.zip", env=env, learning_rate=log10_schedule(0.001), tensorboard_log=log_dir)
+        model = PPO.load(f"agentsdir / {agent}.zip", env=env, learning_rate=schedule(lr), n_steps=rollout, tensorboard_log=log_dir)
 
     model.set_logger(new_logger)
 
