@@ -16,7 +16,7 @@ _ID = 0
 class SnakeEnvWrapper(SnakeEnv, gym.Env):
 
 
-    def __init__(self, *args, max_steps=200, **kwargs):
+    def __init__(self, *args, max_steps=None, **kwargs):
         # new = copy.deepcopy(kwargs)
         # new["grid_size"] = [15, 15]
         # new["n_snakes"] = 1
@@ -29,7 +29,7 @@ class SnakeEnvWrapper(SnakeEnv, gym.Env):
         
         # print(f"{self._ID} - constructed!")
         # denote max steps
-        self.max_steps = 200
+        self.max_steps = max_steps if max_steps is not None else 100000000
         self.n_steps = 0
         self.n_rewards = 0
         # infer obs space

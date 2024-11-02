@@ -81,13 +81,21 @@ class TensorboardCallback(BaseCallback):
 
 if __name__ == "__main__":
     # Initialize the custom environment
-    n_envs = 4
-    agent = "Dummy"
+    argparser = ArgumentParser()
+    argparser.add_argument("--agent", type=str, default="new-agent", help="The name of the agent you want to train")
+    argparser.add_argument("--steps", type=int, default=1_000_000, help="The number of training steps")
+    
+    args = argparser.parse_args()
+
+    agent = args.agent
+    steps = args.steps
+
     agentsdir = Path("agents")
     agentsdir.mkdir(exist_ok=True)
 
+    # n_envs = 4
     # env = SubprocVecEnv([lambda: gym.make("snake-sb3") for _ in range(n_envs)])  # uncomment for multithread training
-    env = SnakeEnvWrapper(grid_size=[8,8])
+    env = SnakeEnvWrapper(grid_size=[8,8], max_steps=None)
 
     # Configure the logger for TensorBoard
     log_dir = "./tensorboard_logs/"
@@ -104,7 +112,7 @@ if __name__ == "__main__":
     model.set_logger(new_logger)
 
     # Train the model
-    model.learn(total_timesteps=6_000_000, progress_bar=True)
+    model.learn(total_timesteps=steps, progress_bar=True)
     model.save(agentsdir / f"{agent}")
     model.policy.save(f"{agent}_policy")
     torch.save(model.policy.state_dict(), agentsdir / f"{agent}_policy.pt")
