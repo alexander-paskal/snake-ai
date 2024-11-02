@@ -15,7 +15,6 @@ This project implements a Reinforcement Learning (RL) agent to play the game of 
     - [Prerequisites](#prerequisites)
   - [Training the agent](#training-the-agent)
   - [Evaluation](#evaluation)
-  - [Results](#results)
   - [Future Work](#future-work)
 
 ---
@@ -69,13 +68,6 @@ Once trained, the model can be evaluated with:
 python eval_agent.py
 ```
 This script will visualize the Snake agent’s performance.
-
-
-## Results
-
-![Training Reward Curve](media/rew_curve.png)
-
-![](media/Johnny-Dense-2.gif)
 
 
 
